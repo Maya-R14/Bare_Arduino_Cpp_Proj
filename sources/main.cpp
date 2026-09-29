@@ -1,4 +1,4 @@
-
+//This is some simple code generated using Claude, I want to see if I can get the arduino libraries working here also and to fix the intily lens issues.
 
 void main(void) {
     Serial.begin(9600);
