@@ -1,7 +1,7 @@
 # ==== CONFIG ====
 
 ## Project Name
-PROJECTNAME := ArduinoTest
+PROJECTNAME := Bare_Arduino_Cpp
 
 ## Compilers and linkers used
 CC := avr-gcc
@@ -35,7 +35,7 @@ FLAGS    := -mmcu=$(MCU) -DF_CPU=$(MCU_FREQ) -Wall -Wextra -ffunction-sections -
 CFLAGS   := $(FLAGS) -std=gnu11
 CPPFLAGS := $(FLAGS) -std=gnu++11 -fno-exceptions -fno-rtti
 
-LDFLAGS  := -mmcu=$(MCU) -nostdlib
+LDFLAGS  := -mmcu=$(MCU)
 
 ####################
 
@@ -43,7 +43,6 @@ LDFLAGS  := -mmcu=$(MCU) -nostdlib
 
 SRCS := \
 	sources/main.cpp \
-	sources/drivers/uart.c 
 
 VPATH := $(sort $(dir $(SRCS)))
 
