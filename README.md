@@ -13,3 +13,6 @@ THIS FLASHES BTW
 avrdude -v -p atmega328p -c arduino -P /dev/ttyUSB0 -b 115200 -D -U flash:w:build/Bare_Arduino_Cpp_release/Bare_Arduino_Cpp.hex:i
 
 avrdude -v -p atmega328p -c arduino -P /dev/ttyUSB0 -b 115200 -D -U flash:w:build/Bare_Arduino_Cpp_debug/Bare_Arduino_Cpp.hex:i
+
+
+avr-objdump -d -S build/Bare_Arduino_Cpp_debug/Bare_Arduino_Cpp.elf | less
