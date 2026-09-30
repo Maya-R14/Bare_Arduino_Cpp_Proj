@@ -31,7 +31,7 @@ MCU_FREQ := 16000000UL
 ## MCU Specific flags 
 
 ## Fix Linker Flags I think. Something about standard libraries?
-FLAGS    := -mmcu=$(MCU) -DF_CPU=$(MCU_FREQ) -Wall -Wextra -ffunction-sections -fdata-sections -Os  #check if this is good idk
+FLAGS    := -mmcu=$(MCU) -DF_CPU=$(MCU_FREQ) -Wall -Wextra -ffunction-sections -fdata-sections -Os $(BUILD_FLAGS) #check if this is good idk
 CFLAGS   := $(FLAGS) -std=gnu11
 CPPFLAGS := $(FLAGS) -std=gnu++11 -fno-exceptions -fno-rtti
 
@@ -109,8 +109,8 @@ all: debug release
 debug: TARGET := $(PROJECTNAME)_debug
 debug: BUILD_DIR := build/${TARGET}
 debug:
-	$(MAKE) BUILD_DIR=$(BUILD_DIR) _build
-	$(MAKE) BUILD_DIR=$(BUILD_DIR) _hex
+	$(MAKE) BUILD_DIR=$(BUILD_DIR) BUILD_FLAGS="-DDEBUG -g" _build
+	$(MAKE) BUILD_DIR=$(BUILD_DIR) BUILD_FLAGS="-DDEBUG -g" _hex
 
 #debug: FLAGS += -fno-omit-frame-pointer -fno-inline -g2 -ggdb -O0 
 #debug: $(TARGET_OBJS) | $(BUILD_DIR)
@@ -118,14 +118,12 @@ debug:
 release: TARGET := $(PROJECTNAME)_release
 release: BUILD_DIR := build/${TARGET}
 release:
-	$(MAKE) BUILD_DIR=$(BUILD_DIR) _build
-	$(MAKE) BUILD_DIR=$(BUILD_DIR) _hex
+	$(MAKE) BUILD_DIR=$(BUILD_DIR) BUILD_FLAGS="-DRELEASE" _build
+	$(MAKE) BUILD_DIR=$(BUILD_DIR) BUILD_FLAGS="-DRELEASE" _hex
 
 clean:
-	-rm edit $(objects)
-
-clean_hard:
 	-rm -rf build
+
  ##################333
 #debug: TARGET = $(PROJECTNAME)_debug
 #debug: TARGET_OBJS  := $(addprefix $(BUILD_DIR)/artifacts/, $(notdir $(patsubst %.c,%.o,$(patsubst %.s,%.o,$(patsubst %.cpp,%.o,$(SRCS))))))
