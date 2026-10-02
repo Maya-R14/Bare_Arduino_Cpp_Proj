@@ -103,7 +103,7 @@ _objs: $(OBJSCPP) #$(OBJSC)
 	@echo "Using flags: $(CPPFLAGS)"
 
 # ===== Targets =====
-.PHONY: debug release clean clean_hard
+.PHONY: debug release clean flash_debug flash_release flash_erase
 
 all: debug release
  
@@ -124,6 +124,15 @@ release:
 
 clean:
 	-rm -rf build
+
+flash_debug:
+	avrdude -v -p $(MCU) -c arduino -P /dev/ttyUSB0 -b 115200 -D -U flash:w:build/$(PROJECTNAME)_debug/$(PROJECTNAME).hex:i
+
+flash_release:
+	avrdude -v -p $(MCU) -c arduino -P /dev/ttyUSB0 -b 115200 -D -U flash:w:build/$(PROJECTNAME)_release/$(PROJECTNAME).hex:i
+
+flash_erase:
+	avrdude -p $(MCU) -c arduino -P /dev/ttyUSB0 -b 115200 -e
 
  ##################333
 #debug: TARGET = $(PROJECTNAME)_debug
