@@ -43,6 +43,7 @@ LDFLAGS  := -mmcu=$(MCU)
 
 SRCS := \
 	sources/main.cpp \
+	sources/drivers/uart.cpp
 
 VPATH := $(sort $(dir $(SRCS)))
 
